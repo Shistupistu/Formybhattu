@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For My Bhattu</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+
+
+
+    <style>
+        :root {
+            --bg1: #ffccd5;
+            --bg2: #fde2e4;
+            --card: rgba(255, 255, 255, 0.90);
+            --accent: #c94b6a;
+            --accent-dark: #8f2d45;
+            --text: #4b1f2a;
+        }
+
+        .final {
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        /* Vintage handwritten love letter */
+        .letter {
+            max-width: 640px;
+            margin: 0 auto 40px;
+            padding: 36px 40px;
+            background: linear-gradient(135deg, #fff8ec, #fdf1dd);
+            border-radius: 18px;
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.12),
+                inset 0 0 0 1px rgba(212, 163, 115, 0.35);
+            font-family: 'Allura', cursive;
+            font-size: 1.45rem;
+            line-height: 2.1;
+            color: #5a3a2e;
+            position: relative;
+        }
+
+        /* Soft paper edge */
+        .letter::before {
+            content: '';
+            position: absolute;
+            inset: 6px;
+            border: 1px dashed rgba(212, 163, 115, 0.4);
+            border-radius: 14px;
+            pointer-events: none;
+        }
+
+        /* Paragraph spacing */
+        .letter p {
+            margin-bottom: 22px;
+        }
+
+        /* Salutation & signature slightly bolder */
+        .salutation,
+        .closing {
+            font-size: 1.55rem;
+        }
+
+        .forever {
+            margin: 30px 0 20px;
+            font-style: italic;
+        }
+
+        /* Slight tilt for romantic imperfection */
+        @media (min-width: 768px) {
+            .letter {
+                transform: rotate(-0.3deg);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg1), var(--bg2));
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 0;
+            overflow-y: auto;
+        }
+
+        /* Floating hearts background */
+        .heart {
+            position: fixed;
+            bottom: -20px;
+            font-size: 18px;
+            animation: floatUp 8s linear infinite;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            to {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
+        }
+
+        /* Confetti hearts */
+        .confetti {
+            position: fixed;
+            top: -10px;
+            font-size: 16px;
+            animation: fall 4s linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .card {
+            width: 92%;
+            max-width: 860px;
+            background: var(--card);
+            backdrop-filter: blur(14px);
+            border-radius: 32px;
+            padding: 56px;
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.18);
+            animation: fadeIn 0.6s ease;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            text-align: center;
+            margin: 0 0 20px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 0 0 40px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 28px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        button {
+            border: none;
+            border-radius: 999px;
+            padding: 16px 40px;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            will-change: transform;
+        }
+
+        .yes {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            box-shadow: 0 14px 30px rgba(201, 75, 106, 0.45);
+        }
+
+        .no {
+            background: white;
+            color: var(--accent-dark);
+            border: 2px dashed var(--accent);
+        }
+
+        .bubbleWrap {
+            display: flex;
+            justify-content: center;
+        }
+
+        .bubble {
+            margin-top: 26px;
+            padding: 14px 20px;
+            background: white;
+            border-radius: 14px;
+            text-align: center;
+            max-width: 560px;
+            animation: pop 0.3s ease;
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .final img {
+            max-width: 320px;
+            width: 100%;
+            display: block;
+            margin: 22px auto 12px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        textarea {
+            width: 100%;
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 1rem;
+            margin-top: 12px;
+            border: 1px solid #f1cbd6;
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="hearts"></div>
+    <div class="card" id="app"></div>
+    <audio id="music" src="./love.mp3"></audio>
+    <script>
+        let musicStarted = false;
+
+        function startMusicOnce() {
+            if (musicStarted) return;
+            const music = document.getElementById('music');
+            if (music) {
+                music.volume = 0.5;
+                music.play().catch(() => { });
+                musicStarted = true;
+            }
+        }
+
+        // Floating background hearts
+        const hearts = document.getElementById('hearts');
+        setInterval(() => {
+            const h = document.createElement('div');
+            h.className = 'heart';
+            h.textContent = '💗';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = (6 + Math.random() * 6) + 's';
+            hearts.appendChild(h);
+            setTimeout(() => h.remove(), 12000);
+        }, 500);
+
+        // Confetti burst
+        function launchConfetti() {
+            for (let i = 0; i < 90; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.textContent = Math.random() < 0.7 ? '💖' : '💗';
+                c.style.left = Math.random() * 100 + 'vw';
+                c.style.animationDuration = (3 + Math.random() * 2) + 's';
+                document.body.appendChild(c);
+                setTimeout(() => c.remove(), 5200);
+            }
+        }
+
+        const app = document.getElementById('app');
+
+        // Shared "No" behavior: NO runs away, YES grows, message changes.
+        function attachNoBehavior({ yesBtn, noBtn, messages, bubbleEl }) {
+            let count = 0;
+            // Keep button positions stable after multiple transforms
+            yesBtn.style.transformOrigin = 'center';
+
+            noBtn.addEventListener('click', () => {
+                count++;
+                const x = Math.random() * 220 - 110;
+                const y = Math.random() * 140 - 70;
+                noBtn.style.transform = `translate(${x}px, ${y}px)`;
+                yesBtn.style.transform = `scale(${1 + count * 0.15})`;
+
+                if (bubbleEl && messages && messages.length) {
+                    bubbleEl.innerHTML = `<div class="bubble">${messages[count % messages.length]}</div>`;
+                }
+            });
+
+            return () => count; // (optional) getter if you ever want it
+        }
+
+        // Single linear story: every step uses the same renderer.
+        const steps = [
+            {
+                type: 'question',
+                title: 'Confession time 💕',
+                body: 'Are you aware that you are, objectively speaking, the most handsome man I know?',
+                yesText: 'Obviously',
+                noText: 'I had a hunch',
+                noMessages: [
+                    "A hunch?? Sir. This is not a guessing game.",
+                    "This is a certified fact.",
+                    "Incorrect. Please recalibrate.",
+                    "Everyone else knows. Catch up.",
+                    "Be serious for one second 😌",
+                    "Did you wake up and choose denial?",
+                    "Bold of you to doubt this.",
+                    "This is not up for debate.",
+                    "Excuse me???",
+                    "Wrong answer. Try again.",
+                    "I will personally update your mirror.",
+                    "This level of modesty is suspicious.",
+                    "Blink twice if you’re joking.",
+                    "I promise I have eyes.",
+                    "Don’t make me say it louder."
+                ]
+
+            },
+            {
+                type: 'question',
+                title: 'Reality check ✨',
+                body: 'Do you realize how dangerously charming you are?',
+                yesText: 'I know 😌',
+                noText: 'I doubt it',
+                noMessages: [
+                    "Doubt?? In THIS economy?",
+                    "Incorrect. Please try again.",
+                    "This is a safety concern at this point.",
+                    "You are underestimating yourself. Again.",
+                    "Bold strategy. Still wrong.",
+                    "We’ve been over this.",
+                    "The evidence is overwhelming.",
+                    "Do you want examples?",
+                    "Because I have examples.",
+                    "That charm should come with a warning label.",
+                    "This denial is not cute.",
+                    "Be honest with yourself.",
+                    "I refuse to accept this answer.",
+                    "Try again but louder.",
+                    "Nope. Absolutely not."
+                ]
+
+            },
+            {
+                type: 'question',
+                title: 'Important data point 💘',
+                body: 'Would you agree that we make an unfairly cute pair?',
+                yesText: 'Absolutely',
+                noText: 'Let me think',
+                noMessages: [
+                    "Thinking is unnecessary here.",
+                    "The evidence is overwhelming.",
+                    "There are witnesses.",
+                    "This one was easy, come on.",
+                    "Have you SEEN us?",
+                    "This feels like self-sabotage.",
+                    "Be so serious right now.",
+                    "This answer hurts my feelings a little.",
+                    "I have photographic proof.",
+                    "The math is mathing.",
+                    "You’re just being difficult now.",
+                    "Don’t overthink perfection.",
+                    "Wrong answer, handsome.",
+                    "We literally win.",
+                    "Say it with confidence."
+                ]
+
+            },
+
+            // Serious arc
+            {
+                type: 'question',
+                title: 'Okay… pause for a second.',
+                body: 'Everything so far was fun and cute,  and yes, all of it was serious too.<br><br>But this next part… this is something I’ve been wanting to ask you.<br><br>It’s a little scary.',
+                yesText: 'Okay',
+                noText: 'No',
+                noMessages: [
+                    "Hey. Stay with me.",
+                    "This matters to me.",
+                    "You’re not in trouble, I promise.",
+                    "Just listen for a second.",
+                    "No running away now.",
+                    "I wouldn’t ask if it wasn’t important.",
+                    "Take a breath. It’s okay.",
+                    "You’re safe here.",
+                    "Please don’t say no yet.",
+                    "This is me being brave.",
+                    "Just one more click.",
+                    "I need you to hear this.",
+                    "Trust me a little.",
+                    "You’re doing great so far.",
+                    "Okay but you’re not allowed to leave yet."
+                ]
+
+            },
+            {
+                type: 'question',
+                title: 'Are you sure you want to know the question?',
+                body: 'Like… really sure?',
+                yesText: 'Yes, tell me',
+                noText: 'No',
+                noMessages: [
+                    "You already agreed once.",
+                    "Too late to pretend you’re not curious.",
+                    "I can literally feel you wanting to know.",
+                    "You didn’t come this far to stop here.",
+                    "Just say yes.",
+                    "I promise it’s worth it.",
+                    "No spoilers if you don’t click yes.",
+                    "I see that hesitation.",
+                    "Don’t overthink this.",
+                    "You’re already invested.",
+                    "You know you want to.",
+                    "One tiny click.",
+                    "You’re smiling right now, aren’t you?",
+                    "I’m not letting you back out.",
+                    "Be brave with me."
+                ]
+
+            },
+            {
+                type: 'question',
+                title: 'This is the moment 💖',
+                body: 'No jokes. No teasing.<br><br>One last time… are you sure?',
+                yesText: 'I’m sure',
+                noText: 'No',
+                noMessages: [
+                    "You’re right here.",
+                    "Almost there.",
+                    "Don’t bail now.",
+                    "This is the calm before the sweet part.",
+                    "Just trust me.",
+                    "One last step.",
+                    "I wouldn’t joke about this.",
+                    "Stay with me.",
+                    "You’re safe, I promise.",
+                    "This is important to me.",
+                    "You’ve already chosen, you know.",
+                    "Deep breath.",
+                    "Okay but seriously… stay.",
+                    "You’re doing really well.",
+                    "Please don’t say no right now."
+                ]
+
+            },
+
+            // Final
+            {
+                type: 'final',
+                title: 'Dear Bhattu 💖',
+                body: 'Will you be my Valentine?<br><br>Today. Tomorrow. This year.<br>And the rest of my life.',
+                yesText: 'YES 💖',
+                noText: 'No',
+                noMessages: [
+                    "That’s not the right button.",
+                    "I don’t believe you.",
+                    "Try again, handsome.",
+                    "You know that’s not what you want.",
+                    "This feels like a mistake.",
+                    "I’ll pretend I didn’t see that.",
+                    "Be serious for one second.",
+                    "Nope. Wrong answer.",
+                    "That hurt my feelings a little.",
+                    "Okay but imagine saying yes.",
+                    "I’m giving you another chance.",
+                    "Click the other one.",
+                    "You’re being dramatic.",
+                    "Absolutely not.",
+                    "Yeah… we’re not doing that."
+                ]
+
+            }
+        ];
+
+        let stepIndex = 0;
+
+        function renderStep() {
+            const s = steps[stepIndex];
+
+            app.innerHTML = `
+        <h1>${s.title}</h1>
+        <p>${s.body}</p>
+        <div class="buttons">
+          <button class="yes">${s.yesText}</button>
+          <button class="no">${s.noText}</button>
+        </div>
+        <div class="bubbleWrap" id="bubble"></div>
+      `;
+
+            const yesBtn = app.querySelector('.yes');
+            const noBtn = app.querySelector('.no');
+            const bubbleEl = document.getElementById('bubble');
+
+            // Attach the universal NO behavior (this is what you wanted everywhere)
+            attachNoBehavior({ yesBtn, noBtn, messages: s.noMessages, bubbleEl });
+
+            // YES behavior
+            yesBtn.addEventListener('click', () => {
+                startMusicOnce();
+                if (s.type === 'final') {
+                    success();
+                    return;
+                }
+                stepIndex++;
+                renderStep();
+            });
+        }
+
+        function success() {
+            // Music is optional — if file missing, don't crash.
+            try {
+                const music = document.getElementById('music');
+                if (music) music.play().catch(() => { });
+            } catch (_) { }
+
+            launchConfetti();
+
+            app.innerHTML = `
+            <div class="final">
+  <h1>Happy Valentine’s Day 💖</h1>
+
+  <p class="subtitle">
+    Yay!!! You just made my heart so, so happy. Iloveyou.
+  </p>
+
+  <div class="letter">
+    <p>
+      Thank you for being my Valentine. I was going to write this letter on paper
+      and mail it, but I couldn't. Sorry! 💌
+    </p>
+
+    <p>
+      I wanted to give you something you could open right away, and keep forever.
+      So I made this little website for you. I hope it makes you smile every time
+      you see it. 😊
+    </p>
+
+    <p class="salutation">
+      Mero pyaaro Bhattu,
+    </p>
+
+    <p>
+      One year and two months with you means I now know exactly how you’ll react
+      to things before you even react. Knowing you for almost a decade now.
+      And somehow, I still like you. That’s saying a lot.
+    </p>
+
+    <p>
+      What I love most about us is how normal it feels. Not boring-normal, but
+      easy normal. You’re the person I want to talk to after a long day, the
+      person I tell random thoughts to without filtering, and the person I’m
+      most comfortable being quiet with.
+    </p>
+
+    <p>
+      Timi sanga huda ma ali dherai nai ma jastai hunchu.
+      No pretending, no overthinking, no acting cool. Just me.
+    </p>
+
+    <p>
+      You’ve seen my dramatic side, my emotional side, my annoying side, and
+      instead of running, you stayed. Respect. Hehe!
+    </p>
+
+    <p>
+      Sachai bhannu parda, timi mero life ko sab bhanda important part hau.
+      That realization came so naturally that I didn’t even notice when it happened.
+    </p>
+
+    <p>
+      Timi bina din ali adha jasto lagcha, even on days I pretend I’m fine.
+      What we have feels steady. Not rushed. Not forced. Thank you for being you, and for letting me be me. I hope we can keep being us, just like this, for a long time.
+    </p>
+
+    <p>
+      Ma timilai dherai maya garchu, Bhattu.
+      In a way that’s calm, loyal, and real. Mero Pyaro Valentine.
+    </p>
+
+    <p class="closing">
+      Uhi timro BhattuPaglu,<br>
+      — Sistu
+    </p>
+  </div>
+
+  <p class="forever">
+    So here it is, on the internet, forever. Just like my love for you. 💖
+  </p>
+
+  <img src="./us.JPG" alt="Us together" />
+</div>
+        `;
+
+            // Subtle extra confetti after a moment
+            setTimeout(launchConfetti, 900);
+        }
+
+        renderStep();
+    </script>
+</body>
+
+</html>
